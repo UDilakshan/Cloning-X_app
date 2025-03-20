@@ -1,10 +1,9 @@
-"use client";
-
+import { imagekit } from "@/utils";
 import Image from "./Image";
 import PostInfo from "./PostInfo";
 import PostInteractions from "./PostInteractions"; 
+/* import Video from "./Video"; */
 import Link from "next/link";
-import { imagekit } from "@/utils"; // ✅ Ensure the correct import
 
 interface FileDetailsResponse {
   width: number;
@@ -16,35 +15,36 @@ interface FileDetailsResponse {
 }
 
 const Post = async ({ type }: { type?: "status" | "comment" }) => {
-  // ✅ SAFELY FETCH POST MEDIA
-  const getFileDetails = async (
-    fileId: string
-  ): Promise<FileDetailsResponse | null> => {
-    try {
-      return new Promise((resolve, reject) => {
-        imagekit.getFileDetails(fileId, function (error, result) {
-          if (error) {
-            console.error("ImageKit Error:", error);
-            resolve(null); // Return null instead of crashing
-          } else {
-            resolve(result as FileDetailsResponse);
-          }
-        });
-      });
-    } catch (error) {
-      console.error("Error fetching file details:", error);
-      return null;
-    }
-  };
+ 
+  // FETCH POST MEDIA
 
-  // Example: Fetch a sample file (Can be removed in production)
-  const fileDetails = await getFileDetails("675d943be375273f6003858f");
+  // const getFileDetails = async (
+  //   fileId: string
+  // ): Promise<FileDetailsResponse> => {
+  //   return new Promise((resolve, reject) => {
+  //     imagekit.getFileDetails(fileId, function (error, result) {
+  //       if (error) reject(error);
+  //       else resolve(result as FileDetailsResponse);
+  //     });
+  //   });
+  // };
+
+  // const fileDetails = await getFileDetails("675d943be375273f6003858f");
+
+  // console.log(fileDetails);
 
   return (
     <div className="p-4 border-y-[1px] border-borderGray">
+
+      
       {/* POST TYPE */}
       <div className="flex items-center gap-2 text-sm text-textGray mb-2 from-bold">
-        <svg xmlns="" width="18" height="18" viewBox="0 0 24 24">
+        <svg
+          xmlns=""
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+        >
           <path
             fill="#71767b"
             d="M4.75 3.79l4.603 4.3-1.706 1.82L6 8.38v7.37c0 .97.784 1.75 1.75 1.75H13V20H7.75c-2.347 0-4.25-1.9-4.25-4.25V8.38L1.853 9.91.147 8.09l4.603-4.3zm11.5 2.71H11V4h5.25c2.347 0 4.25 1.9 4.25 4.25v7.37l1.647-1.53 1.706 1.82-4.603 4.3-4.603-4.3 1.706-1.82L18 15.62V8.25c0-.97-.784-1.75-1.75-1.75z"
@@ -53,6 +53,9 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
         <span>Dilakshan reposted</span>
       </div>
 
+
+
+      
       {/* POST CONTENT */}
       <div className={`flex gap-4 ${type === "status" && "flex-col"}`}>
         {/* AVATAR */}
@@ -63,7 +66,6 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
         >
           <Image path="general/Dilakshan.jpeg" alt="" w={100} h={100} tr={true} />
         </div>
-
         {/* CONTENT */}
         <div className="flex-1 flex flex-col gap-2">
           {/* TOP */}
@@ -74,7 +76,13 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
                   type !== "status" && "hidden"
                 } relative w-10 h-10 rounded-full overflow-hidden`}
               >
-                <Image path="general/avatar.png" alt="" w={100} h={100} tr={true} />
+                <Image
+                  path="general/avatar.png"
+                  alt=""
+                  w={100}
+                  h={100}
+                  tr={true}
+                />
               </div>
               <div
                 className={`flex items-center gap-2 flex-wrap ${
@@ -82,14 +90,20 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
                 }`}
               >
                 <h1 className="text-md font-bold">Dilu Uthay</h1>
-                <span className={`text-textGray ${type === "status" && "text-sm"}`}>
+                <span
+                  className={`text-textGray ${type === "status" && "text-sm"}`}
+                >
                   @diluWebDev
                 </span>
-                {type !== "status" && <span className="text-textGray">1 day ago</span>}
+                {type !== "status" && (
+                  <span className="text-textGray">1 day ago</span>
+                )}
               </div>
             </Link>
-            <PostInfo />
+             <PostInfo /> 
           </div>
+
+
 
           {/* TEXT & MEDIA */}
           <Link href={`/DiluWebDev/status/123`}>
@@ -97,9 +111,9 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
               Amazing image that I have captured ever
             </p>
           </Link>
-
-          {/* Dynamic Image Handling */}
-          {fileDetails && fileDetails.fileType === "image" ? (
+          <Image path="general/post.jpeg" alt="" w={600} h={600} />
+          {/* AFTER FETCHING THE POST MEDIA */}
+          {/* {fileDetails && fileDetails.fileType === "image" ? (
             <Image
               path={fileDetails.filePath}
               alt=""
@@ -108,14 +122,15 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
               className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}
             />
           ) : (
-            <Image path="general/post.jpeg" alt="" w={600} h={600} />
-          )}
-
+            <Video
+              path={fileDetails.filePath}
+              className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}
+            />
+          )} */}
           {type === "status" && (
             <span className="text-textGray">8:41 PM · Dec 5, 2024</span>
           )}
-
-          <PostInteractions />
+           <PostInteractions /> 
         </div>
       </div>
     </div>
