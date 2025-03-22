@@ -27,7 +27,7 @@ const ImageEditor = ({
     setSettings((prev) => ({ ...prev, type }));
   };
   return (
-    <div className="fixed md:w-screen w-full h-full md:h-screen left-0 top-0 bg-yellow-400 bg-opacity-75 z-10 flex items-center justify-center">
+    <div className="fixed md:w-screen w-full h-full md:h-screen left-0 top-0 bg-black bg-opacity-75 z-10 flex items-center justify-center">
 
       {/* Desktop */}
       <div className="bg-black rounded-xl p-20 md:flex hidden flex-col">
@@ -145,7 +145,7 @@ const ImageEditor = ({
 
 
       {/* Mobile */}
-      <div className="bg-black w-[90%] h-[60%] rounded-xl p-2 flex md:hidden flex-col">
+      <div className="bg-black w-[90%] h-[50%] rounded-xl p-2 flex md:hidden flex-col">
 
         {/* TOP */}
         <div className="flex items-center justify-between">
@@ -189,8 +189,8 @@ const ImageEditor = ({
 
 
         {/* SETTINGS */}
-         <div className="fixed gap-x-56 bottom-20 flex items-center justify-between text-sm">
-           <div className="flex items-center gap-8">
+         <div className="fixed bottom-20 gap-x-10 flex items-center justify-between text-sm">
+           <div className="flex items-center gap-2">
             <div
               className="flex items-center cursor-pointer"
               onClick={() => handleChangeType("original")}
@@ -208,7 +208,7 @@ const ImageEditor = ({
               Original
             </div>
             <div
-              className="flex items-center gap-2 cursor-pointer"
+              className="flex items-center gap-1 cursor-pointer"
               onClick={() => handleChangeType("wide")}
             >
               <svg width={24} viewBox="0 0 24 24">
