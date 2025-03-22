@@ -18,20 +18,20 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
  
   // FETCH POST MEDIA
 
-  // const getFileDetails = async (
-  //   fileId: string
-  // ): Promise<FileDetailsResponse> => {
-  //   return new Promise((resolve, reject) => {
-  //     imagekit.getFileDetails(fileId, function (error, result) {
-  //       if (error) reject(error);
-  //       else resolve(result as FileDetailsResponse);
-  //     });
-  //   });
-  // };
+   const getFileDetails = async (
+     fileId: string
+   ): Promise<FileDetailsResponse> => {
+     return new Promise((resolve, reject) => {
+       imagekit.getFileDetails(fileId, function (error, result) {
+         if (error) console.log(error);
+         console.log(result);
+      });
+     });
+   };
 
-  // const fileDetails = await getFileDetails("675d943be375273f6003858f");
+   const fileDetails = await getFileDetails("67ded078432c4764164d24e7");
 
-  // console.log(fileDetails);
+   console.log(fileDetails); 
 
   return (
     <div className="p-4 border-y-[1px] border-borderGray">
@@ -111,9 +111,10 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
               Amazing image that I have captured ever
             </p>
           </Link>
-          <Image path="general/post.jpeg" alt="" w={600} h={600} />
+          {/* <Image path="general/post.jpeg" alt="" w={600} h={600} /> */}
+          
           {/* AFTER FETCHING THE POST MEDIA */}
-          {/* {fileDetails && fileDetails.fileType === "image" ? (
+           {fileDetails && fileDetails.fileType === "image" ? (
             <Image
               path={fileDetails.filePath}
               alt=""
@@ -122,11 +123,8 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
               className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}
             />
           ) : (
-            <Video
-              path={fileDetails.filePath}
-              className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}
-            />
-          )} */}
+          <></>
+          )} 
           {type === "status" && (
             <span className="text-textGray">8:41 PM · Dec 5, 2024</span>
           )}
