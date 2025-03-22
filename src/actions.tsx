@@ -20,7 +20,7 @@ export const shareAction = async (formData: FormData,
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
-  const transformation = `w-600, ${
+  const transformation = `md:w-600,  ${
     settings.type === "square"
       ? "ar-1-1"
       : settings.type === "wide"
