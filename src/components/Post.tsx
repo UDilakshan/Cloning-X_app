@@ -23,15 +23,15 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
    ): Promise<FileDetailsResponse> => {
      return new Promise((resolve, reject) => {
        imagekit.getFileDetails(fileId, function (error, result) {
-         if (error) console.log(error);
-         console.log(result);
+         if (error) reject(error);
+         else resolve(result as FileDetailsResponse);
       });
      });
    };
 
-   const fileDetails = await getFileDetails("67ded078432c4764164d24e7");
+    const fileDetails = await getFileDetails("67deecc6432c47641609945d");
 
-   console.log(fileDetails); 
+   console.log(fileDetails);  
 
   return (
     <div className="p-4 border-y-[1px] border-borderGray">
