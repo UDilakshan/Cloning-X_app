@@ -2,7 +2,7 @@ import { imagekit } from "@/utils";
 import Image from "./Image";
 import PostInfo from "./PostInfo";
 import PostInteractions from "./PostInteractions"; 
-/* import Video from "./Video"; */
+import Video from "./Video"; 
 import Link from "next/link";
 
 interface FileDetailsResponse {
@@ -77,7 +77,7 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
                 } relative w-10 h-10 rounded-full overflow-hidden`}
               >
                 <Image
-                  path="general/avatar.png"
+                  path="general/Dilakshan.jpeg"
                   alt=""
                   w={100}
                   h={100}
@@ -123,7 +123,10 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
               className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}
             />
           ) : (
-          <></>
+            <Video
+            path={fileDetails.filePath}
+            className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}
+          />
           )} 
           {type === "status" && (
             <span className="text-textGray">8:41 PM · Dec 5, 2024</span>
