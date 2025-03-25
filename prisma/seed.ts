@@ -59,7 +59,7 @@ async function main() {
       { userId: users[4].id, postId: posts[4].id },
     ],
   });
-  console.log('Likes created.');
+  console.log('Likes created....');
 
   // Create some comments (each comment is a post linked to a parent post)
   const comments = [];
